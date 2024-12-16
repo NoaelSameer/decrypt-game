@@ -11,7 +11,8 @@ function App() {
   
   return (
     <>
-      {level ? <p>Current Level: {level}</p> : <p>No level selected</p>}
+     <Cypher level={level}/>
+      {/* {level ? <p>Current Level: {level}</p> : <p>No level selected</p>} */}
     </>
   );
 }
