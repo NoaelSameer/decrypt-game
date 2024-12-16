@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "src",
+			"path": "../../quizz-app/src"
+		},
+		{
+			"name": "decrypt-game",
+			"path": ".."
+		}
+	],
+	"settings": {}
+}
