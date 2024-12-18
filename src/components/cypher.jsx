@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import cypherData from '../Files/Cyphers';
-import {Keyer, numbero} from '../components/keyer'
-import shuffleArray from "../components/ArrayShuffler"
+import Styler from "./Styler.jsx";
+import GameReturner from "./GameReturner.jsx";
+import Guess from "./Guess.jsx"
 function Cypher({ level }) {
   const actualData = cypherData[level];
   const actualWord = actualData[Math.floor(Math.random() * actualData.length)];
 
-  const [keyData, setkeyData] = useState({
+  const [keyData, setKeyData] = useState({
     key1: [],
     key2: [],
     key3: [],
@@ -14,39 +15,50 @@ function Cypher({ level }) {
     key5: [],
   });
 
+  const [keysString, setKeysString] = useState('');
+  const [valuesString, setValuesString] = useState('');
+
   useEffect(() => {
-    const newKeyData = {
-      key1: [],
-      key2: [],
-      key3: [],
-      key4: [],
-      key5: [],
-    };
-    Keyer(level, actualWord, actualData, newKeyData)
+    const newKeyData = GameReturner(level, actualWord, actualData);
 
-    Object.keys(newKeyData).forEach((key) => {
-      if (newKeyData[key].length > 0) {
-        const maxLength = key === "key5" ? 1 : numbero; // Key5 max length is 1, others are 4
-        while (newKeyData[key].length < maxLength) {
-          newKeyData[key].push("-"); // Pad with "-"
-        }
-      }
-    });
+    setKeysString(newKeyData.keysString);
+    setValuesString(newKeyData.valuesString);
+  }, [actualWord, level]);
 
-    Object.keys(newKeyData).forEach(key =>{
-      newKeyData[key] = shuffleArray(newKeyData[key])
-    })
+  // Guess(actualWord)
 
-    setkeyData(newKeyData);
-  }, [actualWord, level]); // Make sure the effect runs when either actualWord or level changes
+  // function WordGuessingGame({ actualWord }) {
+    // const [inputValue, setInputValue] = useState('');
+  
+  //   const handleSubmit = (e) => {
+  //     e.preventDefault();
+  //     Checker(inputValue, actualWord);
+  //     setInputValue('');  // Clear the input after submission
+  //   };
+  
+  //   return (
+  //     <form onSubmit={handleSubmit}>
+  //       <input 
+  //         type="text" 
+  //         value={inputValue} 
+  //         onChange={(e) => setInputValue(e.target.value)} 
+  //         placeholder="Guess the word"
+  //       />
+  //       <button type="submit">Submit</button>
+  //     </form>
+  //   );
+  // }
 
   return (
-    <>
-  {/* {JSON.stringify(keyData)} */}
-  <p>Random Word: {actualWord}</p>
-      <p>All Words for Level: {JSON.stringify(actualData)}</p>
-      <p>Level: {level}</p>
-    </>
+    <div>
+      <h2>Cypher Game</h2>
+      <p>Keys: {keysString}</p>
+      {/* Render the WordGuessingGame and pass actualWord as a prop */}
+      <p>Characters: {valuesString}</p>
+      <Guess actualWord={actualWord} />
+
+      <p>{actualWord}</p>
+    </div>
   );
 }
 
