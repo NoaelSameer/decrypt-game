@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import cypherData from '../Files/Cyphers';
-import Keyer from '../components/keyer'
+import {Keyer, numbero} from '../components/keyer'
+import shuffleArray from "../components/ArrayShuffler"
 function Cypher({ level }) {
   const actualData = cypherData[level];
   const actualWord = actualData[Math.floor(Math.random() * actualData.length)];
@@ -21,37 +22,28 @@ function Cypher({ level }) {
       key4: [],
       key5: [],
     };
+    Keyer(level, actualWord, actualData, newKeyData)
 
-    switch (level) {
-      case 'peaceful':
-        Keyer(level, actualWord, actualData, newKeyData)
-        break;
-      case 'easy':
-        // Add logic for easy level if needed
-        break;
-      case 'normal':
-        // Add logic for normal level if needed
-        break;
-      case 'hard':
-        // Add logic for hard level if needed
-        break;
-      default:
-        console.error(`Invalid level: ${level}`);
-        return;
-    }
+    Object.keys(newKeyData).forEach((key) => {
+      if (newKeyData[key].length > 0) {
+        const maxLength = key === "key5" ? 1 : numbero; // Key5 max length is 1, others are 4
+        while (newKeyData[key].length < maxLength) {
+          newKeyData[key].push("-"); // Pad with "-"
+        }
+      }
+    });
 
-    // Update keyData state with newKeyData
+    Object.keys(newKeyData).forEach(key =>{
+      newKeyData[key] = shuffleArray(newKeyData[key])
+    })
+
     setkeyData(newKeyData);
   }, [actualWord, level]); // Make sure the effect runs when either actualWord or level changes
 
   return (
     <>
-      <p>Key 1: {keyData.key1.join('')}</p>
-      <p>Key 2: {keyData.key2.join('')}</p>
-      <p>Key 3: {keyData.key3.join('')}</p>
-      <p>Key 4: {keyData.key4.join('')}</p>
-      <p>Key 5: {keyData.key5.join('')}</p>
-      <p>Random Word: {actualWord}</p>
+  {/* {JSON.stringify(keyData)} */}
+  <p>Random Word: {actualWord}</p>
       <p>All Words for Level: {JSON.stringify(actualData)}</p>
       <p>Level: {level}</p>
     </>

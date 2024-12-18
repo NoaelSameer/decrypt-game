@@ -36,16 +36,21 @@ const cipher = {
       "Forgotten-Land"
     ],
     hard: [
-      "Through-the-Fog",
-      "Beneath-the-Stars",
-      "Shadows-in-the-Night",
-      "Beyond-the-Horizon",
-      "Across-the-River",
-      "Within-the-Silence",
-      "Between-the-Lines",
-      "Over-the-Mountains",
-      "Beneath-the-Ocean",
-      "In-the-Midst-of-Time"
+      "Actions-speak-louder",
+      "Every-cloud-has-silver",
+      "Better-late-than-never",
+      "Look-before-you-leap",
+      "Practice-makes-perfect",
+      "A-journey-of-miles",
+      "Two-wrongs-dont-make",
+      "Beauty-is-in-the-eye",
+      "Dont-bite-the-hand",
+      "Rome-wasnt-built-in",
+      "When-it-rains-it-pours",
+      "Fortune-favors-the-bold",
+      "The-early-bird-gets-it",
+      "No-pain-no-gain-always",
+      "A-penny-saved-is-earned"
     ]
   };
   
