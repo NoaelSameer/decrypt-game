@@ -1,5 +1,6 @@
 import Cypher from "./components/cypher";
 import { useLocation } from "react-router-dom";
+import NavBarington from "./components/NavBarington";
 
 function App() {
 
@@ -11,6 +12,7 @@ function App() {
   
   return (
     <>
+     <NavBarington leaderboard="true" rename="" home="true"/>
      <Cypher level={level}/>
       {/* {level ? <p>Current Level: {level}</p> : <p>No level selected</p>} */}
     </>

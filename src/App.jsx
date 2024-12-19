@@ -1,5 +1,9 @@
+import NavBarington from './components/NavBarington';
+
 function App() {
   return (
+    <>
+        <NavBarington leaderboard="true" rename="true" home=""/>
     <div className="h-screen flex flex-col items-center justify-center bg-gray-100">
       <p className="text-[3.5vw] font-semibold m-4">CypherCraft!</p>
       <a
@@ -18,8 +22,12 @@ function App() {
         href="/level?level=hard"
         className="px-[2vw] py-[1vh] bg-blue-500 text-white rounded hover:bg-blue-600">Hard Edition
       </a>
-    </div>
+    </div>  
+
+    </>
+
   );
+
 }
 
 export default App;

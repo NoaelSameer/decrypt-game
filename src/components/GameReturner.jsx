@@ -1,4 +1,4 @@
-import { Keyer, numbero } from './Keyer.jsx';
+import { Keyer, numbero } from './keyer.jsx';
 import shuffleArray from './ArrayShuffler.jsx';
 
 function GameReturner(level, actualWord, actualData) {

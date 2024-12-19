@@ -1,6 +1,8 @@
 const UserData = {
-    name: [""],
+    name: "",
     peaceful: [
         [] 
     ]
 }
+
+export default UserData;
