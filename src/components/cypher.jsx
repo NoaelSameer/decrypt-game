@@ -2,62 +2,41 @@ import { useEffect, useState } from 'react';
 import cypherData from '../Files/Cyphers';
 import Styler from "./Styler.jsx";
 import GameReturner from "./GameReturner.jsx";
-import Guess from "./Guess.jsx"
-function Cypher({ level }) {
-  const actualData = cypherData[level];
-  const actualWord = actualData[Math.floor(Math.random() * actualData.length)];
+import Guess from "./Guess.jsx";
 
+function Cypher({ level }) {
+  const [actualWord, setActualWord] = useState("");
   const [keyData, setKeyData] = useState({
-    key1: [],
-    key2: [],
-    key3: [],
-    key4: [],
-    key5: [],
+    keysString: "",
+    valuesString: "",
   });
 
-  const [keysString, setKeysString] = useState('');
-  const [valuesString, setValuesString] = useState('');
+  // Function to select a random word and set up cipher keys
+  const initializeGame = () => {
+    const actualData = cypherData[level];
+    const newWord = actualData[Math.floor(Math.random() * actualData.length)];
+    setActualWord(newWord);
 
+    const newKeyData = GameReturner(level, newWord, actualData);
+    setKeyData({
+      keysString: newKeyData.keysString,
+      valuesString: newKeyData.valuesString,
+    });
+  };
+
+  // Initialize game on component mount and when level changes
   useEffect(() => {
-    const newKeyData = GameReturner(level, actualWord, actualData);
-
-    setKeysString(newKeyData.keysString);
-    setValuesString(newKeyData.valuesString);
-  }, [actualWord, level]);
-
-  // Guess(actualWord)
-
-  // function WordGuessingGame({ actualWord }) {
-    // const [inputValue, setInputValue] = useState('');
-  
-  //   const handleSubmit = (e) => {
-  //     e.preventDefault();
-  //     Checker(inputValue, actualWord);
-  //     setInputValue('');  // Clear the input after submission
-  //   };
-  
-  //   return (
-  //     <form onSubmit={handleSubmit}>
-  //       <input 
-  //         type="text" 
-  //         value={inputValue} 
-  //         onChange={(e) => setInputValue(e.target.value)} 
-  //         placeholder="Guess the word"
-  //       />
-  //       <button type="submit">Submit</button>
-  //     </form>
-  //   );
-  // }
+    initializeGame();
+  }, [level]);
 
   return (
     <div>
       <h2>Cypher Game</h2>
-      <p>Keys: {keysString}</p>
-      {/* Render the WordGuessingGame and pass actualWord as a prop */}
-      <p>Characters: {valuesString}</p>
-      <Guess actualWord={actualWord} />
-
-      <p>{actualWord}</p>
+      <p>Keys: {keyData.keysString}</p>
+      <p>Characters: {keyData.valuesString}</p>
+      
+      {/* Pass actualWord and a callback to reset the game */}
+      <Guess actualWord={actualWord} resetGame={initializeGame} />
     </div>
   );
 }

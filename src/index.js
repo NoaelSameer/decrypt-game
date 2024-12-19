@@ -3,14 +3,12 @@ import ReactDOM from 'react-dom/client';
 import './pages/css/index.css';
 import App from './App';
 import Cypher from './level';
-import Namer from "./Namer";
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 
 const router = createBrowserRouter([
-  {path:"/home", element: <App />},
+  {path:"/", element: <App />},
   {path:"/level", element:<Cypher />},
-  {path:"/", element:<Namer />}
 
   // {path:"/gallery", element: <Gallery />},
   // Add more routes as needed
